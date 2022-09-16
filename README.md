@@ -19,3 +19,4 @@ The example above simply mount current working directory and runs `flutter test`
 [![](https://images.microbadger.com/badges/version/davidmartos96/flutter:beta.svg)](https://microbadger.com/images/davidmartos96/flutter:beta) [![](https://images.microbadger.com/badges/image/davidmartos96/flutter:beta.svg)](https://microbadger.com/images/davidmartos96/flutter:beta)
 
 [![](https://images.microbadger.com/badges/version/davidmartos96/flutter:dev.svg)](https://microbadger.com/images/davidmartos96/flutter:dev) [![](https://images.microbadger.com/badges/image/davidmartos96/flutter:dev.svg)](https://microbadger.com/images/davidmartos96/flutter:dev)
+
