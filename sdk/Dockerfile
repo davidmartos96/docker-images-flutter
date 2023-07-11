@@ -5,6 +5,10 @@ USER root
 
 ARG flutter_version
 
+RUN sudo apt update && sudo apt install -y openjdk-17-jdk
+
+ENV JAVA_HOME=/usr/lib/jvm/java-17-openjdk-amd64
+
 ENV FLUTTER_HOME=${HOME}/sdks/flutter \
     FLUTTER_VERSION=$flutter_version
 ENV FLUTTER_ROOT=$FLUTTER_HOME
