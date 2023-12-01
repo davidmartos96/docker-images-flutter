@@ -19,7 +19,7 @@ jobs:
           chmod +x ~/bin/yq
           echo "$HOME/bin" >> $GITHUB_PATH
 
-          apt install jq
+          sudo apt-get install -y jq curl
 
       - name: Check for new Flutter versions 
         run: sh scripts/update_flutter_versions.sh
