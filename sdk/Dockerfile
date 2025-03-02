@@ -1,6 +1,6 @@
-FROM ghcr.io/cirruslabs/android-sdk:35
+FROM ghcr.io/davidmartos96/android-sdk:35
 
-LABEL org.opencontainers.image.source=https://github.com/cirruslabs/docker-images-flutter
+LABEL org.opencontainers.image.source=https://github.com/davidmartos96/docker-images-flutter
 USER root
 
 ARG flutter_version
