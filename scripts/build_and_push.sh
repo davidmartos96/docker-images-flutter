@@ -15,7 +15,7 @@ PUSH="${1:-false}"
 : "${DOCKER_TAG:?DOCKER_TAG is required}"
 
 # Build android SDK image if needed
-scripts/android_build_and_push.sh
+scripts/android_build_and_push.sh "$PUSH"
 
 echo "==> Building Flutter image..."
 
