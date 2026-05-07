@@ -1,0 +1,27 @@
+FROM android-sdk:local
+
+USER root
+
+ARG flutter_version
+
+ENV FLUTTER_ROOT=/opt/flutter \
+    FLUTTER_VERSION=$flutter_version \
+    PATH=$PATH:/opt/flutter/bin:/opt/flutter/bin/cache/dart-sdk/bin
+
+RUN mkdir -p ${FLUTTER_ROOT}
+
+# Install Flutter (rarely changes → good cache layer)
+RUN git clone --depth 1 --branch ${FLUTTER_VERSION} \
+    https://github.com/flutter/flutter.git ${FLUTTER_ROOT}
+
+# Precache only what we need (important for speed)
+RUN flutter precache --android
+
+# Warm up Flutter once (creates cache dirs)
+RUN flutter doctor
+
+# Accept licenses (stable layer)
+RUN yes | flutter doctor --android-licenses > /dev/null
+
+# Remove git history to shrink layer
+RUN rm -rf ${FLUTTER_ROOT}/.git
