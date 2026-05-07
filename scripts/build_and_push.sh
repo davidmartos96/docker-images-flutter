@@ -16,11 +16,13 @@ PUSH="${1:-false}"
 
 # Build android SDK image
 echo "==> Building Android base image..."
-docker build -f sdk/Dockerfile.android -t android-sdk:local .
+docker buildx build --platform linux/amd64,linux/arm64 \
+   -f sdk/Dockerfile.android -t android-sdk:local .
 
 echo "==> Building Flutter image..."
 
-docker build -f sdk/Dockerfile.flutter \
+docker buildx build --platform linux/amd64,linux/arm64 \
+   -f sdk/Dockerfile.flutter \
    --tag "$FLUTTER_IMAGE_1" \
    --tag "$FLUTTER_IMAGE_2" \
    --build-arg flutter_version="$FLUTTER_VERSION" \
