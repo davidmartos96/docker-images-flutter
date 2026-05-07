@@ -35,8 +35,8 @@ jobs:
 
       - name: Build only
         if: github.ref != 'refs/heads/master'
-        run: ./build_and_push.sh
+        run: ./scripts/build_and_push.sh
 
       - name: Build and push
         if: github.ref == 'refs/heads/master'
-        run: ./build_and_push.sh true
+        run: ./scripts/build_and_push.sh true
