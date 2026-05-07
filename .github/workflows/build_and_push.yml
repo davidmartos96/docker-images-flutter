@@ -21,7 +21,12 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-
+      
+      - uses: actions/cache@v4
+        with:
+          path: .android-hash
+          key: android-hash-${{ hashFiles('sdk/Dockerfile.android') }}
+          
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
 

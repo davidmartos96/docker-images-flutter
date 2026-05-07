@@ -14,10 +14,8 @@ PUSH="${1:-false}"
 : "${FLUTTER_VERSION:?FLUTTER_VERSION is required}"
 : "${DOCKER_TAG:?DOCKER_TAG is required}"
 
-# Build android SDK image
-echo "==> Building Android base image..."
-docker buildx build --platform linux/amd64,linux/arm64 \
-   -f sdk/Dockerfile.android -t android-sdk:local .
+# Build android SDK image if needed
+scripts/android_build_and_push.sh
 
 echo "==> Building Flutter image..."
 
