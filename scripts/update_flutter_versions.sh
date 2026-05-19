@@ -2,18 +2,20 @@
 set -e
 
 # This script fetches the latest version of a the stable and beta flutter channels
-# and edits the Github workflow file with the latest version
+# and edits the env file with the latest Flutter version
 
 releases_json=$(curl -s https://storage.googleapis.com/flutter_infra_release/releases/releases_linux.json)
 
-# This function edits the Github workflow file with the given flutter version for the given docker tag
-edit_workflow_file_for_tag() {
-    wf_file=".github/workflows/build_and_push.yml"
+# This function edits the env files with the given flutter version for the given docker tag
+edit_versions_env_for_tag() {
+    file="versions.env"
     docker_tag=$1
     version=$2
 
-    # env for yq
-    DOCKER_TAG=$docker_tag FLUTTER_VERSION=$version yq -i '.env.DOCKER_TAG = env(DOCKER_TAG) | .env.FLUTTER_VERSION = env(FLUTTER_VERSION)' "$wf_file"
+    sed -i \
+        -e "s/^DOCKER_TAG=.*/DOCKER_TAG=${docker_tag}/" \
+        -e "s/^FLUTTER_VERSION=.*/FLUTTER_VERSION=${version}/" \
+        "$file"
 }
 
 # This function fetches the latest version of a particular channel (stable, beta) for Flutter
@@ -40,7 +42,7 @@ stable_version=$(get_latest_version_in_channel "stable")
 # echo "Latest beta version: $beta_version"
 echo "Latest stable version: $stable_version"
 
-edit_workflow_file_for_tag "stable" "$stable_version"
+edit_versions_env_for_tag "stable" "$stable_version"
 # edit_cirrus_file_for_tag "latest" "$stable_version"
 # edit_cirrus_file_for_tag "beta" "$beta_version"
 
